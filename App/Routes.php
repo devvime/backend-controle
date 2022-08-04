@@ -15,7 +15,7 @@ $app->post('/user', 'UserController@store');
 $app->post('/auth', 'AuthController@auth');
 
 $app->group('/user', function() use($app) {
-    $app->get('/', 'UserController@index');
+    $app->get('', 'UserController@index');
     $app->get('/:id', 'UserController@find');    
     $app->put('/:id', 'UserController@update');
     $app->delete('/:id', 'UserController@destroy');
