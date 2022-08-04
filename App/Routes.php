@@ -14,14 +14,19 @@ $app->get('/', function($req, $res) {
 $app->post('/user', 'UserController@store');
 $app->post('/auth', 'AuthController@auth');
 
-$app->group('/user', function() use($app) {
-    $app->get('', 'UserController@index');
-    $app->get('/:id', 'UserController@find');    
-    $app->put('/:id', 'UserController@update');
+$app->get('/user', 'UserController@index');
+    $app->get('/user/:id', 'UserController@find');    
+    $app->put('/user/:id', 'UserController@update');
     $app->delete('/:id', 'UserController@destroy');
-}, function() use($authMiddleware) {
-    $authMiddleware->index();
-});
+
+// $app->group('/user', function() use($app) {
+//     $app->get('', 'UserController@index');
+//     $app->get('/:id', 'UserController@find');    
+//     $app->put('/:id', 'UserController@update');
+//     $app->delete('/:id', 'UserController@destroy');
+// }, function() use($authMiddleware) {
+//     $authMiddleware->index();
+// });
 
 $app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
 $app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
