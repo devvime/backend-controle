@@ -8,4 +8,4 @@ use App\Core\HttpService;
 HttpService::json();
 HttpService::cors();
 
-require_once('app/Routes.php');
+require_once('App/Routes.php');
