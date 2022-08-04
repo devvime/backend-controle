@@ -1,0 +1,30 @@
+{
+    "name": "devvime/viimee-php",
+    "description": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Victor Alves Mendes",
+            "email": "victor@estilodev.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "PHP":">=7.0.0",
+        "firebase/php-jwt": "^5.2",
+        "phpmailer/phpmailer": "^6.1",
+        "rain/raintpl": "3.0.0",
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "scripts":{
+        "start":"php -S localhost:8080",
+        "new-controller": "php -f App/Services/CreateController.php",
+        "new-middleware": "php -f App/Services/CreateMiddleware.php",
+        "new-mail": "php -f App/Services/CreateEmailController.php"
+
+    }
+}
