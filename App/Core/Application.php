@@ -25,9 +25,9 @@ class Application {
 
     public function getController($controller) 
     {
-        if (file_exists("App\\Controllers\\{$controller}.php")) {
-            require_once("App\\Controllers\\{$controller}.php");
-            $class = "App\\Controllers\\". $controller;
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "\\App\\Controllers\\{$controller}.php")) {
+            require_once($_SERVER['DOCUMENT_ROOT'] . "\\App\\Controllers\\{$controller}.php");
+            $class = $_SERVER['DOCUMENT_ROOT'] . "\\App\\Controllers\\". $controller;
             return new $class();
         } else {
             echo json_encode([
