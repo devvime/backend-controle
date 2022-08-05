@@ -26,7 +26,7 @@ class Application {
     public function getController($controller) 
     {
         if (file_exists("App\\Controllers\\{$controller}.php")) {
-            require_once("App\\Controllers\\{$controller}.php");
+            include_once("App\\Controllers\\{$controller}.php");
             $class = "App\\Controllers\\". $controller;
             return new $class();
         } else {
@@ -41,7 +41,7 @@ class Application {
     public function getMiddleware($middleware) 
     {
         if (file_exists("App\\Middlewares\\{$middleware}.php")) {
-            require_once("App\\Middlewares\\{$middleware}.php");
+            include_once("App\\Middlewares\\{$middleware}.php");
             $class = "App\\Middlewares\\". $middleware;
             return new $class();
         } else {
