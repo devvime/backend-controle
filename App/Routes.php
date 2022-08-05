@@ -8,7 +8,7 @@ $app = new Application();
 $authMiddleware = new AuthMiddleware;
 
 $app->get('/', function($req, $res) {
-    $res->json(['title'=>'Simple CRUD PHP']);
+    $res->json(['title'=>'Simple CRUD PHP', 'root'=>$_SERVER['DOCUMENT_ROOT']]);
 });
 
 $app->post('/user', 'UserController@store');
