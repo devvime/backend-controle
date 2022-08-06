@@ -23,6 +23,18 @@ $app->post('/auth', function($req, $res) use($authController) {
     $authController->auth($req, $res);
 });
 
+$app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
+// $app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
+// $app->post('/month', 'MonthControler@store', 'AuthMiddleware@index');
+// $app->put('/month/:id', 'MonthControler@update', 'AuthMiddleware@index');
+// $app->delete('/month/:id', 'MonthControler@destroy', 'AuthMiddleware@index');
+
+// $app->get('/expense', 'ExpenseController@index', 'AuthMiddleware@index');
+// $app->get('/expense/:id', 'ExpenseController@find', 'AuthMiddleware@index');
+// $app->post('/expense', 'ExpenseController@store', 'AuthMiddleware@index');
+// $app->put('/expense/:id', 'ExpenseController@update', 'AuthMiddleware@index');
+// $app->delete('/expense/:id', 'ExpenseController@destroy', 'AuthMiddleware@index');
+
 $app->group('/user', function() use($app, $user) {
     $app->get('', function($req, $res) use($user) {
         $user->index($req, $res);
@@ -42,18 +54,5 @@ $app->group('/user', function() use($app, $user) {
 }, function($req, $res) use($authMiddleware) {
     $authMiddleware->index($req, $res);
 });
-
-
-$app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
-// $app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
-// $app->post('/month', 'MonthControler@store', 'AuthMiddleware@index');
-// $app->put('/month/:id', 'MonthControler@update', 'AuthMiddleware@index');
-// $app->delete('/month/:id', 'MonthControler@destroy', 'AuthMiddleware@index');
-
-// $app->get('/expense', 'ExpenseController@index', 'AuthMiddleware@index');
-// $app->get('/expense/:id', 'ExpenseController@find', 'AuthMiddleware@index');
-// $app->post('/expense', 'ExpenseController@store', 'AuthMiddleware@index');
-// $app->put('/expense/:id', 'ExpenseController@update', 'AuthMiddleware@index');
-// $app->delete('/expense/:id', 'ExpenseController@destroy', 'AuthMiddleware@index');
     
 $app->run();
