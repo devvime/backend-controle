@@ -41,9 +41,9 @@ class Application {
 
     public function getMiddleware($middleware) 
     {
-        if (file_exists(__DIR__ . "/../App/Middlewares/{$middleware}.php")) {
-            include_once(__DIR__ . "/../App/Middlewares/{$middleware}.php");
-            $class = __DIR__ . "/../App/Middlewares/". $middleware;
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/App/Middlewares/{$middleware}.php")) {
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/App/Middlewares/{$middleware}.php");
+            $class = "App\\Middlewares\\". $middleware;
             return new $class();
         } else {
             echo json_encode([
