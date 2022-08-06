@@ -17,12 +17,11 @@ class UserController extends ControllerService {
 
     public function index($req, $res) {
         // self::$usersModel->paginate();
-        // $result = self::$usersModel->select('id, name, email'); 
-        // $res->json([
-        //     "status"=>200,
-        //     "data"=>$result
-        // ]);
-        echo json_encode(['aaaaaaaaaaaaa']);
+        $result = self::$usersModel->select('id, name, email'); 
+        $res->json([
+            "status"=>200,
+            "data"=>$result
+        ]);
     }
 
     public function find($req, $res)
