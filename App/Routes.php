@@ -1,9 +1,9 @@
 <?php
 
-use App\Core\Application;
 use App\Middlewares\AuthMiddleware;
+use App\Controllers\UserController;
 
-$app = new Application();
+$app = new \Slim\App;
 $authMiddleware = new AuthMiddleware;
 
 $app->get('/', function($req, $res) {
@@ -25,13 +25,11 @@ $app->post('/expense', 'ExpenseController@store', 'AuthMiddleware@index');
 $app->put('/expense/:id', 'ExpenseController@update', 'AuthMiddleware@index');
 $app->delete('/expense/:id', 'ExpenseController@destroy', 'AuthMiddleware@index');
 
-$app->group('/user', function() use($app) {
-    $app->get('', 'UserController@index');
-    $app->get('/:id', 'UserController@find');    
-    $app->put('/:id', 'UserController@update');
-    $app->delete('/:id', 'UserController@destroy');
-}, function() use($authMiddleware) {
-    $authMiddleware->index();
+$app->group('', function($app) {
+    $app->get('/user', UserController::class . ':index');
+    // $app->get('/:id', 'UserController@find');    
+    // $app->put('/:id', 'UserController@update');
+    // $app->delete('/:id', 'UserController@destroy');
 });
 
 $app->run();

@@ -15,10 +15,10 @@ class UserController extends ControllerService {
         self::$usersModel = new SqlService('users');        
     }
 
-    public function index($req, $res) {
+    public function index($request, $response, $args) {
         self::$usersModel->paginate();
         $result = self::$usersModel->select('id, name, email'); 
-        $res->json([
+        echo json_encode([
             "status"=>200,
             "data"=>$result
         ]);
