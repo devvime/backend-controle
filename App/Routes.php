@@ -19,40 +19,24 @@ $app->get('/', function($req, $res) {
     $res->json(['title'=>'Simple CRUD PHP']);
 });
 
-$app->post('/auth', function($req, $res) use($authController) {
-    $authController->auth($req, $res);
-});
+$app->post('/auth', 'AuthControler@auth');
+
+$app->get('/user', 'UserController@index', 'AuthMiddleware@index');
+$app->get('/user/:id', 'UserController@find', 'AuthMiddleware@index');
+$app->post('/user', 'UserController@store', 'AuthMiddleware@index');
+$app->put('/user/:id', 'UserController@update', 'AuthMiddleware@index');
+$app->delete('/user/:id', 'UserController@destroy', 'AuthMiddleware@index');
 
 $app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
-// $app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
-// $app->post('/month', 'MonthControler@store', 'AuthMiddleware@index');
-// $app->put('/month/:id', 'MonthControler@update', 'AuthMiddleware@index');
-// $app->delete('/month/:id', 'MonthControler@destroy', 'AuthMiddleware@index');
+$app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
+$app->post('/month', 'MonthControler@store', 'AuthMiddleware@index');
+$app->put('/month/:id', 'MonthControler@update', 'AuthMiddleware@index');
+$app->delete('/month/:id', 'MonthControler@destroy', 'AuthMiddleware@index');
 
-// $app->get('/expense', 'ExpenseController@index', 'AuthMiddleware@index');
-// $app->get('/expense/:id', 'ExpenseController@find', 'AuthMiddleware@index');
-// $app->post('/expense', 'ExpenseController@store', 'AuthMiddleware@index');
-// $app->put('/expense/:id', 'ExpenseController@update', 'AuthMiddleware@index');
-// $app->delete('/expense/:id', 'ExpenseController@destroy', 'AuthMiddleware@index');
-
-$app->group('/user', function() use($app, $user) {
-    $app->get('', function($req, $res) use($user) {
-        $user->index($req, $res);
-    });
-    $app->get('/:id', function($req, $res) use($user) {
-        $user->find($req, $res);
-    });
-    $app->post('', function($req, $res) use($user) {
-        $user->store($req, $res);
-    });
-    $app->put('/:id', function($req, $res) use($user) {
-        $user->update($req, $res);
-    });
-    $app->delete('/:id', function($req, $res) use($user) {
-        $user->destroy($req, $res);
-    });
-}, function($req, $res) use($authMiddleware) {
-    $authMiddleware->index($req, $res);
-});
+$app->get('/expense', 'ExpenseController@index', 'AuthMiddleware@index');
+$app->get('/expense/:id', 'ExpenseController@find', 'AuthMiddleware@index');
+$app->post('/expense', 'ExpenseController@store', 'AuthMiddleware@index');
+$app->put('/expense/:id', 'ExpenseController@update', 'AuthMiddleware@index');
+$app->delete('/expense/:id', 'ExpenseController@destroy', 'AuthMiddleware@index');
     
 $app->run();
