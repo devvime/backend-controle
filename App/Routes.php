@@ -14,10 +14,10 @@ $app->get('/', function($req, $res) {
 
 // $app->post('/auth', 'AuthController@auth');
 
-// $app->get('/user', function($req, $res) use($user) {
-//     $user->index($req, $res);
-// });
-$app->get('/user', 'UserController@index');
+$app->get('/user', function($req, $res) use($user) {
+    $user->index($req, $res);
+});
+// $app->get('/user', 'UserController@index');
 // $app->get('/user/:id', 'UserController@find');    
 // $app->post('/user', 'UserController@store');
 // $app->put('/user/:id', 'UserController@update');
