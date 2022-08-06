@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Core\ControllerService;
 use App\Core\SqlService;
 
-class MonthControler extends ControllerService {
+class MonthController extends ControllerService {
 
     private static $monthModel;
 

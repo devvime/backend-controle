@@ -8,9 +8,9 @@ $app->get('/', function($req, $res) {
     $res->json(['title'=>'Simple CRUD PHP']);
 });
 
-$app->post('/auth', 'AuthControler@auth');
-
+$app->post('/auth', 'AuthController@auth');
 $app->post('/user', 'UserController@store');
+
 $app->group('/user', function() use($app) {
     $app->get('', 'UserController@index');
     $app->get('/:id', 'UserController@find');    
@@ -18,16 +18,20 @@ $app->group('/user', function() use($app) {
     $app->delete('/:id', 'UserController@destroy');
 }, 'AuthMiddleware@index');
 
-$app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
-$app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
-$app->post('/month', 'MonthControler@store', 'AuthMiddleware@index');
-$app->put('/month/:id', 'MonthControler@update', 'AuthMiddleware@index');
-$app->delete('/month/:id', 'MonthControler@destroy', 'AuthMiddleware@index');
+$app->group('/month', function() use($app) {
+    $app->get('', 'MonthController@index');
+    $app->get('/:id', 'MonthController@find');
+    $app->post('', 'MonthController@store');
+    $app->put('/:id', 'MonthController@update');
+    $app->delete('/:id', 'MonthController@destroy');
+}, 'AuthMiddleware@index');
 
-$app->get('/expense', 'ExpenseController@index', 'AuthMiddleware@index');
-$app->get('/expense/:id', 'ExpenseController@find', 'AuthMiddleware@index');
-$app->post('/expense', 'ExpenseController@store', 'AuthMiddleware@index');
-$app->put('/expense/:id', 'ExpenseController@update', 'AuthMiddleware@index');
-$app->delete('/expense/:id', 'ExpenseController@destroy', 'AuthMiddleware@index');
+$app->group('/expense', function() use($app) {
+    $app->get('', 'ExpenseController@index');
+    $app->get('/:id', 'ExpenseController@find');
+    $app->post('', 'ExpenseController@store');
+    $app->put('/:id', 'ExpenseController@update');
+    $app->delete('/:id', 'ExpenseController@destroy');
+}, 'AuthMiddleware@index');
     
 $app->run();
