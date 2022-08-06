@@ -14,7 +14,7 @@ $app->get('/', function($req, $res) {
 // $app->post('/auth', 'AuthController@auth');
 
 $app->get('/user', function($req, $res) {
-    $user = new UserController();
+    $user = new UserController;
     $user->index($req, $res);
 });
 // $app->get('/user', 'UserController@index');
