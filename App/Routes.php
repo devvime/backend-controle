@@ -7,9 +7,9 @@ use App\Controllers\UserController;
 $app = new \Slim\App;
 $authMiddleware = new AuthMiddleware;
 
-$app->get('/', function($request, $response) {
-    $res->json(['title'=>'Simple CRUD PHP', 'root'=>$_SERVER['DOCUMENT_ROOT']]);
-});
+// $app->get('/', function($request, $response) {
+//     $res->json(['title'=>'Simple CRUD PHP', 'root'=>$_SERVER['DOCUMENT_ROOT']]);
+// });
 
 // $app->post('/user', 'UserController@store');
 // $app->post('/auth', 'AuthController@auth');
