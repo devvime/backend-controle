@@ -1,19 +1,8 @@
 <?php
 
 use App\Core\Application;
-use App\Middlewares\AuthMiddleware;
-use App\Controllers\AuthController;
-use App\Controllers\UserController;
-use App\Controllers\MonthControler;
-use App\Controllers\ExpenseController;
 
 $app = new Application();
-
-$authMiddleware = new AuthMiddleware;
-$authController = new AuthController();
-$user = new UserController();
-$month = new MonthControler();
-$expense = new ExpenseController();
 
 $app->get('/', function($req, $res) {
     $res->json(['title'=>'Simple CRUD PHP']);
