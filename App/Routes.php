@@ -10,11 +10,13 @@ $app->get('/', function($req, $res) {
 
 $app->post('/auth', 'AuthControler@auth');
 
-$app->get('/user', 'UserController@index', 'AuthMiddleware@index');
-$app->get('/user/:id', 'UserController@find', 'AuthMiddleware@index');
-$app->post('/user', 'UserController@store', 'AuthMiddleware@index');
-$app->put('/user/:id', 'UserController@update', 'AuthMiddleware@index');
-$app->delete('/user/:id', 'UserController@destroy', 'AuthMiddleware@index');
+$app->post('/user', 'UserController@store');
+$app->group('/user', function() use($app) {
+    $app->get('', 'UserController@index');
+    $app->get('/:id', 'UserController@find');    
+    $app->put('/:id', 'UserController@update');
+    $app->delete('/:id', 'UserController@destroy');
+}, 'AuthMiddleware@index');
 
 $app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
 $app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
