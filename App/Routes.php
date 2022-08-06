@@ -7,7 +7,7 @@ use App\Controllers\UserController;
 $app = new \Slim\App;
 $authMiddleware = new AuthMiddleware;
 
-$app->get('/', function($req, $res) {
+$app->get('/', function($request, $response) {
     $res->json(['title'=>'Simple CRUD PHP', 'root'=>$_SERVER['DOCUMENT_ROOT']]);
 });
 
