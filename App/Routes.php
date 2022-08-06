@@ -6,6 +6,7 @@ use App\Controllers\UserController;
 
 $app = new Application();
 $authMiddleware = new AuthMiddleware;
+$user = new UserController();
 
 $app->get('/', function($req, $res) {
     $res->json(['title'=>'Simple CRUD PHP']);
@@ -13,8 +14,7 @@ $app->get('/', function($req, $res) {
 
 // $app->post('/auth', 'AuthController@auth');
 
-$app->get('/user', function($req, $res) {
-    $user = new UserController;
+$app->get('/user', function($req, $res) use($user) {
     $user->index($req, $res);
 });
 // $app->get('/user', 'UserController@index');
