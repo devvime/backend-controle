@@ -25,9 +25,9 @@ class Application {
 
     public function getController($controller) 
     {
-        if (file_exists("App\\Controllers\\{$controller}.php")) {
-            include_once("App\\Controllers\\{$controller}.php");
-            $class = "App\\Controllers\\". $controller;
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/App/Controllers/{$controller}.php")) {
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/App/Controllers/{$controller}.php");
+            $class = $_SERVER['DOCUMENT_ROOT'] . "/App/Controllers/". $controller;
             return new $class();
         } else {
             echo json_encode([
@@ -41,9 +41,9 @@ class Application {
 
     public function getMiddleware($middleware) 
     {
-        if (file_exists("App\\Middlewares\\{$middleware}.php")) {
-            include_once("App\\Middlewares\\{$middleware}.php");
-            $class = "App\\Middlewares\\". $middleware;
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/App/Middlewares/{$middleware}.php")) {
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/App/Middlewares/{$middleware}.php");
+            $class = $_SERVER['DOCUMENT_ROOT'] . "/App/Middlewares/". $middleware;
             return new $class();
         } else {
             echo json_encode([
