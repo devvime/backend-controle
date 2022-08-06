@@ -25,8 +25,8 @@ class Application {
 
     public function getController($controller) 
     {
-        if (file_exists("App\\Controllers\\{$controller}.php")) {
-            include_once("App\\Controllers\\{$controller}.php");
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/App/Controllers/{$controller}.php")) {
+            include_once($_SERVER['DOCUMENT_ROOT'] . "/App/Controllers/{$controller}.php");
             $class = "App\\Controllers\\". $controller;
             return new $class();
         } else {
