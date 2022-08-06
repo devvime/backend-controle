@@ -2,17 +2,26 @@
 
 use App\Core\Application;
 use App\Middlewares\AuthMiddleware;
+use App\Controllers\AuthController;
 use App\Controllers\UserController;
+use App\Controllers\MonthControler;
+use App\Controllers\ExpenseController;
 
 $app = new Application();
+
 $authMiddleware = new AuthMiddleware;
+$auth = new AuthController();
 $user = new UserController();
+$month = new MonthControler();
+$expense = new ExpenseController();
 
 $app->get('/', function($req, $res) {
     $res->json(['title'=>'Simple CRUD PHP']);
 });
 
-// $app->post('/auth', 'AuthController@auth');
+$app->post('/auth', function($req, $res) use($auth) {
+    $auth->auth($req, $res);
+});
 
 $app->get('/user', function($req, $res) use($user) {
     $user->index($req, $res);
