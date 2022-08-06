@@ -16,7 +16,7 @@ class UserController extends ControllerService {
     }
 
     public function index($req, $res) {
-        self::$usersModel->paginate();
+        // self::$usersModel->paginate();
         $result = self::$usersModel->select('id, name, email'); 
         $res->json([
             "status"=>200,
