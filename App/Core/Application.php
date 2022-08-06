@@ -25,14 +25,15 @@ class Application {
 
     public function getController($controller) 
     {
-        if (file_exists("{$_SERVER['DOCUMENT_ROOT']}/App/Controllers/{$controller}.php")) {
-            include_once("{$_SERVER['DOCUMENT_ROOT']}/App/Controllers/{$controller}.php");
+        if (file_exists(__DIR__ . "/../../App/Controllers/{$controller}.php")) {
+            include_once(__DIR__ . "/../../App/Controllers/{$controller}.php");
             $class = "App\\Controllers\\". $controller;
             return new $class();
         } else {
             echo json_encode([
                 "error"=>404,
-                "meaage"=>"App/Controllers/" . $controller . ".php is not found!"
+                "meaage"=>"App/Controllers/" . $controller . ".php is not found!",
+                "DIR"=>__DIR__
             ]);
             exit;
         }
@@ -40,8 +41,8 @@ class Application {
 
     public function getMiddleware($middleware) 
     {
-        if (file_exists("{$_SERVER['DOCUMENT_ROOT']}/App/Middlewares/{$middleware}.php")) {
-            include_once("{$_SERVER['DOCUMENT_ROOT']}/App/Middlewares/{$middleware}.php");
+        if (file_exists(__DIR__ . "/../../App/Middlewares/{$middleware}.php")) {
+            include_once(__DIR__ . "/../../App/Middlewares/{$middleware}.php");
             $class = "App\\Middlewares\\". $middleware;
             return new $class();
         } else {
