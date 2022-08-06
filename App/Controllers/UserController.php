@@ -15,7 +15,7 @@ class UserController extends ControllerService {
         self::$usersModel = new SqlService('users');        
     }
 
-    public function index($request, $response, $args) {
+    public function index($request, $response) {
         self::$usersModel->paginate();
         $result = self::$usersModel->select('id, name, email'); 
         echo json_encode([
@@ -33,7 +33,7 @@ class UserController extends ControllerService {
         ]);
     }
 
-    public function store($req, $res) {
+    public function store($request, $response) {
         $existUser = self::$usersModel->select('id, name, email', "WHERE email = '{$req->body->email}'");
         if (count($existUser) > 0) {
             $res->json([
@@ -49,23 +49,23 @@ class UserController extends ControllerService {
         $req->body->password = JWT::encode($req->body->password, SECRET);                
         $result = self::$usersModel->create($req->body);
         if ($result) {
-            $this->index($req, $res);
+            $this->index($request, $response);
         }
     }
 
-    public function update($req, $res) {
+    public function update($request, $response) {
         $this->validate($req->params->id, 'required');
         $result = self::$usersModel->update($req->body, "WHERE id = {$req->params->id}");
         if ($result) {
-            $this->index($req, $res);
+            $this->index($request, $response);
         }
     }
 
-    public function destroy($req, $res) {
+    public function destroy($request, $response) {
         $this->validate($req->params->id, 'required');
         $result = self::$usersModel->destroy($req->params->id);
         if ($result) {
-            $this->index($req, $res);
+            $this->index($request, $response);
         }
     }
 }
