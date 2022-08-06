@@ -10,7 +10,7 @@ use App\Controllers\ExpenseController;
 $app = new Application();
 
 $authMiddleware = new AuthMiddleware;
-$auth = new AuthController();
+$authController = new AuthController();
 $user = new UserController();
 $month = new MonthControler();
 $expense = new ExpenseController();
@@ -19,20 +19,32 @@ $app->get('/', function($req, $res) {
     $res->json(['title'=>'Simple CRUD PHP']);
 });
 
-$app->post('/auth', function($req, $res) use($auth) {
-    $auth->auth($req, $res);
+$app->post('/auth', function($req, $res) use($authController) {
+    $authController->auth($req, $res);
 });
 
-$app->get('/user', function($req, $res) use($user) {
-    $user->index($req, $res);
+$app->group('/user', function() use($app, $user) {
+    $app->get('', function($req, $res) use($user) {
+        $user->index($req, $res);
+    });
+    $app->get('/:id', function($req, $res) use($user) {
+        $user->find($req, $res);
+    });
+    $app->post('', function($req, $res) use($user) {
+        $user->store($req, $res);
+    });
+    $app->put('/:id', function($req, $res) use($user) {
+        $user->update($req, $res);
+    });
+    $app->delete('/:id', function($req, $res) use($user) {
+        $user->destroy($req, $res);
+    });
+}, function($req, $res) use($authMiddleware) {
+    $authMiddleware->index($req, $res);
 });
-// $app->get('/user', 'UserController@index');
-// $app->get('/user/:id', 'UserController@find');    
-// $app->post('/user', 'UserController@store');
-// $app->put('/user/:id', 'UserController@update');
-// $app->delete('/user/:id', 'UserController@destroy');
 
-// $app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
+
+$app->get('/month', 'MonthControler@index', 'AuthMiddleware@index');
 // $app->get('/month/:id', 'MonthControler@find', 'AuthMiddleware@index');
 // $app->post('/month', 'MonthControler@store', 'AuthMiddleware@index');
 // $app->put('/month/:id', 'MonthControler@update', 'AuthMiddleware@index');
