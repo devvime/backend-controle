@@ -34,6 +34,7 @@ class Application {
                 "error"=>404,
                 "meaage"=>"App/Controllers/" . $controller . ".php is not found!",
                 "DIR"=>__DIR__ . "\\..\\"
+            ]);
             exit;
         }
     }
