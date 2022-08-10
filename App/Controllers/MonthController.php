@@ -20,7 +20,7 @@ class MonthController extends ControllerService {
 
     public function index($req, $res) {
         $user_token = self::$httpService->getBearerToken();
-        $userData = JWT::encode($req->params->userId, SECRET);
+        $userData = JWT::encode($user_token, SECRET);
         $result = self::$monthModel->select("*");
         $res->json([
             "status"=>200,
