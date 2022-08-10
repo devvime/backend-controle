@@ -24,7 +24,6 @@ class MonthController extends ControllerService {
         $result = self::$monthModel->select("*", "WHERE userId = {$userData->id}");
         $res->json([
             "status"=>200,
-            "userData"=>$userData,
             "data"=>$result
         ]);
     }
