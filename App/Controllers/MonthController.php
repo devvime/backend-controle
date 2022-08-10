@@ -21,7 +21,7 @@ class MonthController extends ControllerService {
     public function index($req, $res) {
         $user_token = self::$httpService->getBearerToken();
         $userData = JWT::decode($user_token, SECRET, ['HS256']);
-        $result = self::$monthModel->select("*");
+        $result = self::$monthModel->select("*", "WHERE userId = {$userData->id}");
         $res->json([
             "status"=>200,
             "userData"=>$userData,
