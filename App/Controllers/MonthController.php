@@ -4,20 +4,27 @@ namespace App\Controllers;
 
 use App\Core\ControllerService;
 use App\Core\SqlService;
+use App\Core\HttpService;
+use Firebase\JWT\JWT;
 
 class MonthController extends ControllerService {
 
     private static $monthModel;
+    private static $httpService;
 
     public function __construct()
     {
         self::$monthModel = new SqlService("month");
+        self::$httpService = new HttpService();
     }
 
     public function index($req, $res) {
+        $user_token = self::$httpService->getBearerToken();
+        $userData = JWT::encode($req->params->userId, SECRET);
         $result = self::$monthModel->select("*");
         $res->json([
             "status"=>200,
+            "userData"=>$userData,
             "data"=>$result
         ]);
     }
